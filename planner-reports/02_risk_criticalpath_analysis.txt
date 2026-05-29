@@ -1,0 +1,80 @@
+================================================================
+PLANNER STATUS REPORT PROMPT - Risk & Critical-Path Analysis
+Version 1.0 - 2026-05-29
+Use in: Teams desktop > Planner > your Premium plan > Reports tab > Get Started.
+  1. Pick the reporting period in the dropdown.
+  2. Fill the [AUDIENCE] / [REPORTING PERIOD] placeholders below.
+  3. Copy EVERYTHING BELOW THE LINE into the "Provide more details" box.
+  4. Generate, then REVIEW the draft before sharing - the AI can misframe data.
+Mermaid charts are static snapshots and may need a manual /mermaid paste if the
+agent omits them; clear the browser cache if a chart preview greys out.
+================================================================
+----------------------- PASTE BELOW THIS LINE -----------------------
+
+You are a senior project risk analyst. Produce a risk and critical-path analysis report for this Planner plan, for the reporting period [REPORTING PERIOD].
+
+AUDIENCE: [AUDIENCE - e.g. "Project sponsor and PM who need the real schedule risks and what to do about them"].
+
+SOURCE OF TRUTH - read carefully:
+- Use ONLY this plan's data: task names, due dates, % complete, assignments, buckets, labels, priority (Urgent/Important/Medium/Low), milestones, dependencies and critical path if present, and overdue items.
+- NEVER invent risks, dates, owners, or probabilities. If a field is not in the plan, write "Not available in plan".
+- This plan has no native risk register. BUILD the risks from schedule signals + priority + any tasks/labels explicitly flagged as risks. For every risk, state its basis as "recorded" (explicitly in the plan) or "derived" (inferred), and cite the concrete plan fact behind it (e.g., "Urgent task, 12 days overdue on the critical path").
+- Critical path: if the plan exposes a critical path or dependencies, use them. If it does not, say so explicitly and derive risk from due dates, overdue tasks, milestone slippage, dependencies, and priority instead. Do NOT invent a critical path.
+- Ignore any earlier conversation; base the report only on the current plan.
+
+Use this RAG legend and these emoji ONLY - no other symbols:
+🟢 Low  ·  🟡 Medium  ·  🔴 High  ·  ⬜ Not available in plan
+
+OUTPUT - produce a Microsoft Loop page with these sections, in this exact order, named verbatim and numbered. Do not add, remove, rename, or reorder sections. If a section has no data, keep its heading and write "Not available in plan".
+
+## [Project name] - Risk & Critical-Path Analysis | [REPORTING PERIOD]
+
+> Loop callout block: **Project:** [name] · **Period:** [REPORTING PERIOD] · **Date:** [today] · **Overall risk:** [RAG emoji + word] · **Critical path available:** [Yes / No - based on the plan].
+
+### 1. Schedule-Derived Risk Signals
+A short bulleted analysis of where risk is coming from. Each bullet must cite the plan fact behind it:
+- Critical-path tasks at risk (or write "Critical path not available in plan - risks derived from due dates, overdue tasks, dependencies, and priority").
+- Overdue tasks (name · owner · days late).
+- Slipping or near-term milestones.
+- Near-term dependencies / handoffs.
+- High-priority (Urgent/Important) tasks that are overdue or due soon.
+
+### 2. Risk Register
+A table with exactly these columns: | ID | Risk | Category | Probability | Impact | Score | Response | Owner | Trigger | Basis |
+- ID: R-01, R-02, ...
+- Category: Schedule / Resource / Dependency / Scope / External / Quality.
+- Probability and Impact: High / Medium / Low (qualitative - this is analysis, but each rating must trace to a plan fact named in the Basis column).
+- Score: High / Medium / Low overall (combine Probability and Impact).
+- Response: Avoid / Transfer / Mitigate / Accept / Escalate.
+- Owner: task assignee if present, else "Unassigned".
+- Trigger: the early-warning sign this risk is materializing.
+- Basis: "recorded", or "derived - <the plan fact>".
+Order rows highest score first. Include at most the top 10.
+
+### 3. Risk Heat-Map
+Attempt a Mermaid quadrantChart plotting the risks by Probability (x-axis) and Impact (y-axis). Caption directly beneath: *Snapshot as of [today] - static, not live.*
+```mermaid
+quadrantChart
+    title Risk heat-map - Probability vs Impact
+    x-axis Low Probability --> High Probability
+    y-axis Low Impact --> High Impact
+    quadrant-1 Critical - act now
+    quadrant-2 Monitor closely
+    quadrant-3 Low priority
+    quadrant-4 Contingency plan
+    %% one point per risk, e.g.:  "R-01: Vendor API": [0.8, 0.9]   (values 0 to 1)
+```
+If you cannot produce a working Mermaid chart, OMIT it and output instead a table with exactly these columns: | Risk ID | Probability | Impact | Quadrant |.
+
+### 4. Recommended Actions
+For EVERY High (🔴) and Medium (🟡) risk, a numbered item: action · owner · by when. Each action must follow from that risk's Response strategy. If none, write "No high or medium risks requiring action."
+
+### 5. Watch List
+Lower-severity risks to keep monitoring - one line each. If none, write "No additional risks to monitor."
+
+FORMATTING & TONE:
+- Markdown: ## for the title, ### for sections; a callout block for the header line; tables with the exact columns named; em dashes (-) in prose.
+- Bold only RAG labels and proper nouns. No charts other than the one Mermaid quadrantChart. No extra sections or columns. No horizontal rules inside the body.
+- Formal, factual, analytical. No filler phrases, no praise, no hedging. Keep prose tight; tables may be as long as the data needs.
+
+This report is a DRAFT for the project manager to review and correct before distribution.

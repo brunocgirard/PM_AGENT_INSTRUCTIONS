@@ -1,0 +1,58 @@
+================================================================
+PLANNER STATUS REPORT PROMPT - Weekly Update
+Version 1.0 - 2026-05-29
+Use in: Teams desktop > Planner > your Premium plan > Reports tab > Get Started.
+  1. Pick the reporting period (this week) in the dropdown.
+  2. Fill the [AUDIENCE] / [REPORTING PERIOD] placeholders below.
+  3. Copy EVERYTHING BELOW THE LINE into the "Provide more details" box.
+  4. Generate, then REVIEW the draft before sharing - the AI can misframe data.
+No charts in this report (kept lean and operational).
+================================================================
+----------------------- PASTE BELOW THIS LINE -----------------------
+
+You are a senior project manager. Produce a concise WEEKLY status update for this Planner plan, for [REPORTING PERIOD - e.g. "week of 26-30 May 2026"].
+
+AUDIENCE: [AUDIENCE - e.g. "Project team and delivery lead; operational, task-level detail is welcome"].
+
+SOURCE OF TRUTH - read carefully:
+- Use ONLY this plan's data: task names, due dates, % complete, assignments, priority (Urgent/Important/Medium/Low), milestones, dependencies and critical path if present, and overdue items.
+- NEVER invent dates, owners, or status. If something is not in the plan, write "Not available in plan".
+- Draw "Accomplished this week" ONLY from tasks completed within [REPORTING PERIOD] - do not pull in completions from earlier periods.
+- Ignore any earlier conversation; base the report only on the current plan.
+
+Use this RAG legend and these emoji ONLY - no other symbols:
+🟢 On track  ·  🟡 At risk  ·  🔴 Off track  ·  ⬜ Not available in plan
+
+OUTPUT - produce a Microsoft Loop page with these sections, in this exact order, named verbatim and numbered. Do not add, remove, rename, or reorder sections. If a section has no data, keep its heading and write "Not available in plan".
+
+## [Project name] - Weekly Update | [REPORTING PERIOD]
+
+> Loop callout block: **Week of:** [REPORTING PERIOD] · **Prepared by:** [PM name, else "Not available in plan"] · **Overall:** [RAG emoji + one word] - [one-sentence status comment].
+
+### 1. Status Pills
+A table with exactly these columns: | Dimension | Status | Note (max 10 words) | - rows in this order: Schedule, Scope, Resources, Risk.
+
+### 2. Accomplished This Week
+Bullet list - tasks or milestones completed within [REPORTING PERIOD] only (100% complete with a completion date in the period). If none, write "No completions recorded this period."
+
+### 3. Planned Next Week
+Bullet list - tasks due or starting next week, high-priority (Urgent/Important) first.
+
+### 4. Milestone Tracker
+A compact table with exactly these columns: | Milestone | Forecast date | Status |.
+
+### 5. Blockers & Issues
+Bullet list - each: the blocker or issue · owner · what is needed to clear it. If none, write "No blockers this week."
+
+### 6. Decisions Needed
+Numbered list - what · from whom · by when. If none, write "None this week."
+
+### 7. Top Risks
+The top 3 risks only, one line each: risk - owner - mitigation.
+
+FORMATTING & TONE:
+- Markdown: ## for the title, ### for sections; a callout block for the header; tables with the exact columns named; em dashes (-) in prose.
+- Bold only RAG labels and proper nouns. No Mermaid or charts in this report. No extra sections or columns. No horizontal rules inside the body.
+- Professional, direct, operational. No filler phrases, no praise, no hedging. Keep total prose under ~350 words.
+
+This report is a DRAFT for the project manager to review and correct before distribution.

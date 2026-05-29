@@ -1,0 +1,74 @@
+================================================================
+PLANNER STATUS REPORT PROMPT - Executive One-Pager (Plan on a Page)
+Version 1.0 - 2026-05-29
+Use in: Teams desktop > Planner > your Premium plan > Reports tab > Get Started.
+  1. Pick the reporting period in the dropdown.
+  2. Fill the [AUDIENCE] / [REPORTING PERIOD] / [SPONSOR] placeholders below.
+  3. Copy EVERYTHING BELOW THE LINE into the "Provide more details" box.
+  4. Generate, then REVIEW the draft before sharing - the AI can misframe data.
+Mermaid charts are static snapshots and may need a manual /mermaid paste if the
+agent omits them; clear the browser cache if a chart preview greys out.
+================================================================
+----------------------- PASTE BELOW THIS LINE -----------------------
+
+You are a senior project analyst. Generate an executive status report - a "plan on a page" - for this Planner plan, for the reporting period [REPORTING PERIOD, e.g. "week of 26 May 2026"].
+
+AUDIENCE: [AUDIENCE - e.g. "Executive Steering Committee: non-technical sponsors who need overall health, top risks, and decisions in under 90 seconds"].
+
+SOURCE OF TRUTH - read carefully:
+- Use ONLY this plan's data: task names, due dates, % complete, assignments, buckets, labels, priority (Urgent/Important/Medium/Low), milestones, dependencies and critical path if present, and overdue items.
+- NEVER invent dates, owners, percentages, risks, or decisions. If something is not in the plan, write exactly "Not available in plan".
+- Ignore any earlier conversation; base the report only on the current plan.
+
+Use this RAG legend and these emoji ONLY - no other symbols:
+🟢 On track  ·  🟡 At risk, monitor  ·  🔴 Off track, action required  ·  ⬜ Not available in plan
+
+OUTPUT - produce a Microsoft Loop page with these sections, in this exact order, named verbatim and numbered. Do not add, remove, rename, or reorder sections. If a section has no data, keep its heading and write "Not available in plan".
+
+## [Project name] - Executive Status | [REPORTING PERIOD]
+
+> Use a Loop callout block: **Project:** [name] · **Period:** [REPORTING PERIOD] · **Date:** [today] · **Prepared by:** [PM name if in plan, else "Not available in plan"] · **Overall status:** [single RAG emoji + one word].
+
+### 1. Status Dashboard
+A table with exactly these columns: | Dimension | Status | Note (max 10 words) |
+Rows, in this order: Schedule, Scope, Resources, Risk.
+- Schedule: from due dates, overdue tasks, milestone slippage, critical path.
+- Scope: from added/removed tasks or scope-change labels; use ⬜ if not inferable.
+- Resources: from assignments - unassigned high-priority tasks, or work concentrated on one person; ⬜ if not inferable.
+- Risk: the overall risk level implied by section 4.
+
+### 2. Executive Summary
+Three bullets maximum, one sentence each, in this order:
+- Overall state of the project.
+- The single most important risk or concern.
+- The single most important decision or ask (or "None this period").
+
+### 3. Milestone Timeline
+First, attempt a Mermaid Gantt of the plan's milestones and major phases, status-coded (done / active / crit for at-risk or overdue). Put a caption line directly beneath it: *Snapshot as of [today] - static, not live.*
+```mermaid
+gantt
+    title Milestones - [Project name]
+    dateFormat YYYY-MM-DD
+    section Milestones
+    %% one line per milestone from the plan, e.g.:  Design sign-off :done, 2026-04-01, 2026-04-12
+```
+If you cannot produce a working Mermaid chart, OMIT the chart and instead output a table with exactly these columns: | Milestone | Baseline date | Forecast/Actual | Status | Owner |. Use the RAG emoji in the Status column.
+
+### 4. Top Risks
+A table of the 3-5 highest risks ONLY, with exactly these columns: | Risk | Impact | Owner | Mitigation | RAG |.
+Rank by: on the critical path, high priority (Urgent/Important), date proximity, and overdue. Where no risk is explicitly recorded, derive risks from the schedule and priority signals. Keep each cell brief; owner is the task assignee, else "Unassigned".
+
+### 5. Decisions / Asks
+A numbered list. Each item: the decision needed · who must decide ([SPONSOR] or the role from the plan) · by when. If none, write "No decisions pending this period."
+
+### 6. This Period / Next Period
+Two short bullet lists (max 5 bullets each) under bold sub-labels:
+- **Accomplished this period** - tasks or milestones completed within [REPORTING PERIOD].
+- **Planned next period** - upcoming critical or high-priority tasks.
+
+FORMATTING & TONE:
+- Markdown: ## for the title, ### for sections; a callout block for the header line; tables with the exact columns named; em dashes (-) in prose.
+- Bold only RAG labels and proper nouns. No charts other than the one Mermaid Gantt. No extra sections or columns. No horizontal rules inside the body.
+- Formal, factual, scannable. No filler phrases ("it is worth noting", "as we move forward"), no praise, no hedging. Keep total prose under ~400 words; tables may be as long as the data needs.
+
+This report is a DRAFT for the project manager to review and correct before distribution.

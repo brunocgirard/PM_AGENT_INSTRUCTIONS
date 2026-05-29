@@ -1,0 +1,68 @@
+================================================================
+PLANNER STATUS REPORT PROMPT - Milestone & Schedule Health
+Version 1.0 - 2026-05-29
+Use in: Teams desktop > Planner > your Premium plan > Reports tab > Get Started.
+  1. Pick the reporting period in the dropdown.
+  2. Fill the [AUDIENCE] / [REPORTING PERIOD] placeholders below.
+  3. Copy EVERYTHING BELOW THE LINE into the "Provide more details" box.
+  4. Generate, then REVIEW the draft before sharing - the AI can misframe data.
+Mermaid charts are static snapshots and may need a manual /mermaid paste if the
+agent omits them; clear the browser cache if a chart preview greys out.
+================================================================
+----------------------- PASTE BELOW THIS LINE -----------------------
+
+You are a senior project scheduler. Produce a MILESTONE & SCHEDULE HEALTH report for this Planner plan, for [REPORTING PERIOD].
+
+AUDIENCE: [AUDIENCE - e.g. "PM and PMO who need schedule detail and the milestone trend"].
+
+SOURCE OF TRUTH - read carefully:
+- Use ONLY this plan's data: task names, start and due dates, % complete, assignments, priority (Urgent/Important/Medium/Low), milestones, dependencies and critical path if present, and overdue items.
+- NEVER invent dates or variance. If a baseline or field is not in the plan, write "Not available in plan".
+- Do NOT compute EVM, SPI, or CPI - the plan has no cost or effort baseline, so those would be misleading. Use milestone variance (forecast vs baseline dates), % complete, overdue tasks, and critical-path/priority signals instead.
+- Critical path: use it if the plan exposes one; if not, say so and identify the tasks most likely to drive the end date. Do NOT invent a critical path.
+- Ignore any earlier conversation; base the report only on the current plan.
+
+Use this RAG legend and these emoji ONLY - no other symbols:
+🟢 On track  ·  🟡 At risk  ·  🔴 Off track / overdue  ·  ⬜ Not available in plan
+
+OUTPUT - produce a Microsoft Loop page with these sections, in this exact order, named verbatim and numbered. Do not add, remove, rename, or reorder sections. If a section has no data, keep its heading and write "Not available in plan".
+
+## [Project name] - Milestone & Schedule Health | [REPORTING PERIOD]
+
+> Loop callout block: **Project:** [name] · **Period:** [REPORTING PERIOD] · **Date:** [today] · **Overall schedule:** [RAG emoji + word] · **% complete:** [overall % from the plan].
+
+### 1. Milestone Gantt
+Attempt a Mermaid Gantt of milestones and major phases, status-coded (done / active / crit for at-risk or overdue). Caption directly beneath: *Snapshot as of [today] - static, not live.*
+```mermaid
+gantt
+    title Schedule - [Project name]
+    dateFormat YYYY-MM-DD
+    %% group into sections by bucket/phase; one line per milestone or key task with status, e.g.:
+    %% section Build
+    %% Build complete :active, 2026-05-01, 2026-06-20
+```
+If a working chart isn't possible, OMIT it - the tracker in section 2 carries the data.
+
+### 2. Milestone Tracker
+A table with exactly these columns: | ID | Milestone | Phase | Baseline date | Forecast/Actual | Variance (days) | Status | Owner | Recovery (if 🟡/🔴) |
+- Variance = forecast/actual minus baseline, in days (negative = late); "Not available in plan" if there is no baseline.
+- A Recovery note is required for every 🟡 and 🔴 row.
+
+### 3. Overdue Tasks
+A table or checklist with exactly these columns: | Task | Owner | Days late | Priority |. List high-priority (Urgent/Important) first. If none, write "No overdue tasks."
+
+### 4. Critical Path / At-Risk
+If the plan exposes a critical path, list its at-risk tasks with the remaining float. If not, write "Critical path not available in plan" and instead list the tasks most likely to drive the end date (due soon, overdue, high-priority, or with dependents).
+
+### 5. Next 30 / 60 / 90 Days
+Three short grouped lists of milestones due within the next 30, 60, and 90 days, each item RAG-coded.
+
+### 6. Schedule Commentary
+2-3 sentences on the schedule trend, within plan data only: is it holding, slipping, or recovering, and the main driver.
+
+FORMATTING & TONE:
+- Markdown: ## for the title, ### for sections; a callout block for the header; tables with the exact columns named; em dashes (-) in prose.
+- Bold only RAG labels and proper nouns. No charts other than the one Mermaid Gantt. No extra sections or columns. No horizontal rules inside the body.
+- Formal, factual, schedule-focused. No filler phrases, no praise, no hedging.
+
+This report is a DRAFT for the project manager to review and correct before distribution.

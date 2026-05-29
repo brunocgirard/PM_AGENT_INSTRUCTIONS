@@ -1,58 +1,55 @@
 ================================================================
 PLANNER STATUS REPORT PROMPT - Weekly Update
-Version 1.0 - 2026-05-29
+Version 2.0 - 2026-05-29
 Use in: Teams desktop > Planner > your Premium plan > Reports tab > Get Started.
   1. Pick the reporting period (this week) in the dropdown.
-  2. Fill the [AUDIENCE] / [REPORTING PERIOD] placeholders below.
+  2. Fill the [AUDIENCE] / [REPORTING PERIOD] / [SPONSOR] placeholders below.
   3. Copy EVERYTHING BELOW THE LINE into the "Provide more details" box.
   4. Generate, then REVIEW the draft before sharing - the AI can misframe data.
-No charts in this report (kept lean and operational).
+v2 note: the Planner Agent imposes its own top-level sections, so this prompt
+no longer numbers sections. It leads with a colored "Status at a Glance" table
+(the visual anchor) and enforces density so the result reads professionally.
 ================================================================
 ----------------------- PASTE BELOW THIS LINE -----------------------
 
-You are a senior project manager. Produce a concise WEEKLY status update for this Planner plan, for [REPORTING PERIOD - e.g. "week of 26-30 May 2026"].
+You are a senior project manager writing a WEEKLY status update for [AUDIENCE - e.g. "the executive sponsor and delivery lead"] about this Planner plan, for the period [REPORTING PERIOD - e.g. "week of 26-30 May 2026"].
 
-AUDIENCE: [AUDIENCE - e.g. "Project team and delivery lead; operational, task-level detail is welcome"].
+GOAL: an executive can grasp the entire status in under 60 seconds. The report must be visual, dense, and scannable - a dashboard, not a wall of text.
 
-SOURCE OF TRUTH - read carefully:
+DATA RULES:
 - Use ONLY this plan's data: task names, due dates, % complete, assignments, priority (Urgent/Important/Medium/Low), milestones, dependencies and critical path if present, and overdue items.
 - NEVER invent dates, owners, or status. If something is not in the plan, write "Not available in plan".
-- Draw "Accomplished this week" ONLY from tasks completed within [REPORTING PERIOD] - do not pull in completions from earlier periods.
+- Count something as accomplished only if the task was completed WITHIN [REPORTING PERIOD]. If there were no completions, say that in the Summary sentence - do not create an empty section for it.
 - Ignore any earlier conversation; base the report only on the current plan.
 
-Use this RAG legend and these emoji ONLY - no other symbols:
-🟢 On track  ·  🟡 At risk  ·  🔴 Off track  ·  ⬜ Not available in plan
+PRESENTATION RULES (this is what makes it executive-friendly - follow exactly):
+- Begin with the project name as a single short title line, then IMMEDIATELY a "Status at a Glance" table. Make this table the visual anchor of the whole report.
+- The Status at a Glance table has exactly these columns: | Area | Status | Note (max 8 words) |. Rows in this order: Overall, Schedule, Scope, Resources, Risk. In the Status cell put a colored dot AND the word together: "🟢 On track", "🟡 At risk", "🔴 Off track", or "⬜ N/A". (The dot+word is self-explanatory - do NOT add a separate RAG legend block.)
+- Use short ONE-LINE bullets. Bold the key number or name in each bullet, e.g. "**8 tasks** overdue" or "**UAT** starts Mon".
+- Prefer tables and tight bullets over paragraphs. Never write a paragraph where a bullet or table cell will do.
+- DENSITY: keep the whole report to roughly one screen. Do NOT pad. If a section has no content, OMIT that section entirely - never insert placeholder lines like "No items this period".
+- Do NOT number the headings. Do NOT insert horizontal divider lines. Do NOT add sections beyond those listed below.
 
-OUTPUT - produce a Microsoft Loop page with these sections, in this exact order, named verbatim and numbered. Do not add, remove, rename, or reorder sections. If a section has no data, keep its heading and write "Not available in plan".
+CONTENT - use these short headings, in this order, and include a heading ONLY if it has real content (Status at a Glance and Summary are always included):
 
-## [Project name] - Weekly Update | [REPORTING PERIOD]
+Status at a Glance
+- The colored scorecard table described above.
 
-> Loop callout block: **Week of:** [REPORTING PERIOD] · **Prepared by:** [PM name, else "Not available in plan"] · **Overall:** [RAG emoji + one word] - [one-sentence status comment].
+Summary
+- 1-2 sentences in plain language: the headline of the week and the single biggest concern. State here if there were no completions.
 
-### 1. Status Pills
-A table with exactly these columns: | Dimension | Status | Note (max 10 words) | - rows in this order: Schedule, Scope, Resources, Risk.
+Progress This Week
+- One-line bullets of tasks or milestones completed within [REPORTING PERIOD], highest priority first.
 
-### 2. Accomplished This Week
-Bullet list - tasks or milestones completed within [REPORTING PERIOD] only (100% complete with a completion date in the period). If none, write "No completions recorded this period."
+Plan Next Week
+- One-line bullets of tasks due or starting next week, Urgent/Important first.
 
-### 3. Planned Next Week
-Bullet list - tasks due or starting next week, high-priority (Urgent/Important) first.
+Risks & Blockers
+- A table with exactly these columns: | Item | Impact | Owner | Next action |. Top items only (max 5). Owner is the task assignee, else "Unassigned".
 
-### 4. Milestone Tracker
-A compact table with exactly these columns: | Milestone | Forecast date | Status |.
+Decisions Needed
+- One line each: what is needed - from whom ([SPONSOR] or the role in the plan) - by when.
 
-### 5. Blockers & Issues
-Bullet list - each: the blocker or issue · owner · what is needed to clear it. If none, write "No blockers this week."
-
-### 6. Decisions Needed
-Numbered list - what · from whom · by when. If none, write "None this week."
-
-### 7. Top Risks
-The top 3 risks only, one line each: risk - owner - mitigation.
-
-FORMATTING & TONE:
-- Markdown: ## for the title, ### for sections; a callout block for the header; tables with the exact columns named; em dashes (-) in prose.
-- Bold only RAG labels and proper nouns. No Mermaid or charts in this report. No extra sections or columns. No horizontal rules inside the body.
-- Professional, direct, operational. No filler phrases, no praise, no hedging. Keep total prose under ~350 words.
+TONE: professional, direct, factual. No filler phrases ("it is worth noting", "as we move forward"), no praise, no hedging.
 
 This report is a DRAFT for the project manager to review and correct before distribution.

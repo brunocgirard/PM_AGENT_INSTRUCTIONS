@@ -173,6 +173,41 @@ Planner plan and audit the plan's health:
 
 ---
 
+## Using the Executive Briefing Builder (one-pager + exec deck)
+
+A third agent, **Executive Briefing Builder**, turns a project's sources into
+executive communication. Set it up the same way (Steps 3–7), pasting from
+`agent/04_EXECUTIVE_BRIEFING_BUILDER.md`. It is **project-agnostic** — supply each
+project's sources per session rather than uploading them as fixed knowledge.
+
+**Per session:**
+
+1. Upload the project's **meeting notes, reviewed charter, other approved docs,
+   and context pack** into the chat (or point it at the specific SharePoint folder
+   with the current versions — exclude any archive/superseded area).
+2. Run **"set my source-of-truth"** and **"validate my sources"** so the agent
+   separates Validated facts from Assumptions before building.
+3. Ask for **"the one-pager"** (Mode A) or **"a 3–5 slide exec deck"** (Mode B).
+
+**Turning the Mode B slide spec into a real .pptx with Copilot in PowerPoint:**
+
+1. Copy the agent's slide spec into a **blank Word document**. Make each **slide
+   title a Heading 1** (select the title line → Home → Heading 1). Keep the
+   bullets as normal text under each heading.
+2. Save the Word file (`.docx`).
+3. Open **PowerPoint**, open **Copilot**, and choose **"Create presentation from
+   file"** — pick that Word file. Copilot builds one slide/section per Heading 1.
+4. For each slide, open the **Notes pane** (View → Notes) and paste in that
+   slide's **`Notes:`** block from the spec — these are the talking points and
+   off-slide caveats, not shown on the slide.
+5. Review every slide against the agent's validation: on-slide content should be
+   validated facts only; anything flagged as an assumption stays in the notes.
+
+The Mode A one-pager Word document can also be used directly as a Copilot source
+if you'd rather generate the deck from it.
+
+---
+
 ## Quick troubleshooting
 
 | Symptom | Fix |

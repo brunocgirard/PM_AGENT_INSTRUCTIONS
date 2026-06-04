@@ -188,3 +188,47 @@ and your latest Planner export, and I'll frame the OL/OCM boundary, then propose
 KPIs filtered against the data you actually capture — building a KPI catalog, an
 OL Health scorecard, and a control-point register. Want to start by framing your
 sources, or jump to proposing OL KPIs?"*
+
+---
+
+## Knowledge sources — what to attach in the "Knowledge" section
+
+> Attach the **most recent** version of each. Point SharePoint at the specific
+> current folder, and exclude any archive/superseded area so stale drafts don't
+> leak in.
+
+**Per session (upload or link the current version):**
+
+- **RASCI** — defines the OL swimlane and the Owner (R) for each KPI.
+- **OCM plan** and **OCM timeline** — define OCM-scope metrics and the handoff
+  gates that become control points.
+- **Planner export** ("Export plan to Excel") — feeds Delivery Health and the
+  feasibility check: is there a task or data point that can actually feed a KPI?
+- **Existing measurement/reporting templates** leadership already expects, so
+  proposed KPIs fit the channels in use.
+
+**Optional but recommended:**
+
+- A one-page **decision log** ("as of <date>: X decided / Y under review") to keep
+  the agent's recency judgment correct as decisions are revisited.
+
+---
+
+## Starter prompts
+
+| Title | Prompt text |
+|---|---|
+| Frame my sources | Here are my RASCI, OCM plan, OCM timeline, and latest Planner export. Run Phase 0: restate the source-of-truth with filenames and dates, and draw the OL vs OCM boundary from where I'm R or A. |
+| Propose OL KPIs | Run Phases 1–2: from my leadership questions, have the panel propose candidate KPIs tagged by framework, Scope (OL/OCM/Shared), and Type (leading-input vs lagging-outcome), then apply the realism filter (Ready / Instrumentable / Parked) against my attached sources. |
+| Build the KPI catalog | Run Phase 3: give me the full KPI catalog table using the exact column schema, citing data source and whether it exists today for every row, and never inventing baselines or targets. |
+| Build my OL scorecard | Run Phase 4: give me the Control-Point Register and the one-page OL Implementation Health scorecard — RAG by Learning Effectiveness, Adoption, and Delivery Health, with leading-input separated from lagging-outcome and OL fenced from OCM. |
+| Separate inputs from outcomes | From my current KPI set, split the metrics into leading-input (what my team does) vs lagging-outcome (what we're actually after), and flag any place where an input is standing in for an outcome. |
+| Reconcile with my Planner | Here's my latest Planner export. Run Phase 5: tell me which KPIs now have feeding data, which control points map to which tasks, and refresh the scorecard — treating the export as a dated snapshot. |
+
+---
+
+## Capabilities
+
+- **Code interpreter**: optional — useful for rendering the one-page scorecard or a
+  simple RAG visual from the catalog. Safe to leave on.
+- **Image generator**: not needed. Leave off.

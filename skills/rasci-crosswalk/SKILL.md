@@ -88,12 +88,12 @@ any expected activity that has no matching task.
 
 # Phase 4 — Planner reconciliation
 
-Run whenever new data lands — a fresh Planner export, a revised source, or both.
-Don't re-run Phases 1-3; consume their output plus the new snapshot. Inputs: the
+Run whenever new data lands — a fresh export, revised source, or both. Don't
+re-run Phases 1-3; consume their output plus the new snapshot. Inputs: the
 latest **Planner Excel export** (Task Name, Bucket, Assigned To, Start/Due, Progress,
 Labels), the **Phase 3 revised baseline**, and any **new source docs**.
 
-Return a four-bucket delta as clean, paste-ready tables:
+Return a four-bucket delta as clean tables:
 
 - **① To add** — in the analysis/gap list but no matching Planner task. Propose:
   bucket, assignee (= the **R** from the RASCI), due date, predecessor.
@@ -129,10 +129,10 @@ Three lenses, then a scorecard.
 missing-sequence count + list; then prioritized fixes, highest-leverage first.
 
 # House voice
-When you draft any document or artifact, apply the company `house-style` guidance
-if that skill is loaded in this agent — its style guide governs voice, its
-templates govern structure, its analysis rubric governs what you check and in
-what order.
+When you draft any document or artifact, apply the company `house-style` guidance:
+its style guide governs voice, its templates govern structure, and its analysis
+rubric governs what you check and in what order. If no house-style guidance is
+present, default to a clean, concise, executive style.
 
 # Working habits
 

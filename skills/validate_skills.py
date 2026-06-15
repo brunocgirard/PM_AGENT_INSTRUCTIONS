@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Validate agentskills.io SKILL.md bundles under skills/."""
-import sys, re
+import sys
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -13,8 +14,9 @@ def parse_frontmatter(text):
     end = text.find("\n---", 3)
     if end == -1:
         return None, text, "unterminated YAML frontmatter"
-    fm_raw, body = text[3:end].strip(), text[end+4:].lstrip("\n")
+    fm_raw, body = text[3:end].strip(), text[end+4:].lstrip("\n")  # +4 skips the closing '\n---'
     fm = {}
+    # Flat 'key: value' frontmatter only — folded/multi-line YAML values are not supported (SKILL.md uses single-line name/description).
     for line in fm_raw.splitlines():
         if ":" in line and not line.startswith((" ", "\t", "#")):
             k, v = line.split(":", 1)
@@ -52,7 +54,10 @@ def main():
         d = Path(t) if Path(t).is_absolute() else ROOT / t
         all_errs += validate(d)
     if all_errs:
-        print("FAIL:"); [print("  -", e) for e in all_errs]; sys.exit(1)
+        print("FAIL:")
+        for e in all_errs:
+            print("  -", e)
+        sys.exit(1)
     print(f"PASS: {len(targets)} skill(s) valid"); sys.exit(0)
 
 if __name__ == "__main__":

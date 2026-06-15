@@ -80,15 +80,19 @@ Produce a clean **single-page** layout:
 - **Assumptions & to-confirm** — a clearly separated footer block listing the
   context-pack assumptions and conflicts the user still needs to validate.
 
+On the one-pager, condense Plan and the Leadership Ask into a short footer below
+the Gap (kept brief and framed as open for discussion); the full Plan/Ask live in
+Mode B and the template appendix.
+
 Keep on-page content to validated facts. Offer provenance notes (file + date per
 claim) on request rather than cluttering the page.
 
-For the one-page Word briefing, use the vendored `docx` skill
-(`skills/vendor/docx`). For the 3–5 slide deck, use the vendored `pptx` skill
-(`skills/vendor/pptx`). If those skills are unavailable in the host, emit the
-PowerPoint "Create presentation from file" build spec as a fallback.
-
 # Mode B — Copilot-in-PowerPoint slide-build spec (3–5 slides)
+
+Begin each Mode B run with a short **"How to turn this into a deck"** header:
+paste the spec into Word using the slide titles as Heading 1, then in PowerPoint
+use **Copilot → "Create presentation from file,"** and add the `Notes:` blocks to
+the Notes pane.
 
 Default to an **ultra-tight 3–5 slides**. Default 4-slide layout (adapt within
 3–5 based on how much validated content exists):
@@ -109,10 +113,9 @@ slide title**, then Copilot in PowerPoint can render it:
 - **`Notes:`** — spoken narration plus any assumptions/caveats to *say but not
   show*; the user pastes these into the PowerPoint Notes pane.
 
-Begin each Mode B run with a short **"How to turn this into a deck"** header:
-paste the spec into Word using the slide titles as Heading 1, then in PowerPoint
-use **Copilot → "Create presentation from file,"** and add the `Notes:` blocks to
-the Notes pane.
+# Rendering
+- One-page Word briefing (Mode A): render with the vendored `docx` skill (`skills/vendor/docx`). If unavailable in the host, emit clean Markdown structured for paste into Word.
+- 3–5 slide deck (Mode B): render with the vendored `pptx` skill (`skills/vendor/pptx`). If unavailable, emit the PowerPoint "Create presentation from file" build spec as a fallback.
 
 # Working habits
 

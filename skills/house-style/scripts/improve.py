@@ -4,6 +4,9 @@ Usage: python improve.py "2026-06-14" "status-report-A (redacted)" "added: lead 
 import sys
 from pathlib import Path
 LOG = Path(__file__).resolve().parent.parent / "references" / "ingest-log.md"
+LOG.parent.mkdir(parents=True, exist_ok=True)
+if not LOG.exists():
+    LOG.write_text("# Ingest log (append-only)\n\n<!-- entries below, newest last -->\n", encoding="utf-8")
 if len(sys.argv) < 4:
     print("Usage: improve.py <date> <file> <changes>"); sys.exit(1)
 date, fname, changes = sys.argv[1], sys.argv[2], sys.argv[3]

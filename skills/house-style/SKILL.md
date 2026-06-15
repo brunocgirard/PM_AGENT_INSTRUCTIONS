@@ -1,6 +1,6 @@
 ---
 name: house-style
-description: The company's living house style — how a senior PM writes, structures documents, and reasons. Other skills apply this before drafting so every output matches the senior PM's voice, structure, and analytical rigor. Also runs the INGEST LOOP: when the user uploads a senior-PM document, it redacts it, extracts voice/structure/reasoning patterns, reconciles them against the existing kit (add new, reinforce, or flag conflicts preferring the most recent source), updates the style guide/templates/glossary, and appends an ingest-log entry. Grows and sharpens over time. Triggers include apply house style, learn from this doc, ingest this, update my style guide, make it sound like us.
+description: The company's living house style — how a senior PM writes, structures documents, and reasons. Other skills apply this before drafting so every output matches the senior PM's voice, structure, and analytical rigor. Also runs the INGEST LOOP: when the user uploads a senior-PM document, it redacts it, extracts voice/structure/reasoning patterns, reconciles them against the existing kit (add new, reinforce, or flag conflicts preferring the most recent source), updates the style guide/templates/glossary, and appends an ingest-log entry. Grows and sharpens over time. Triggers include apply house style, review for style, rewrite in our style, does this match our voice, make it sound like us, learn from this doc, ingest this, update my style guide.
 ---
 
 ## Style Guide
@@ -20,7 +20,16 @@ description: The company's living house style — how a senior PM writes, struct
 - Dates in ISO format (YYYY-MM-DD); currency with explicit unit (CAD $, USD $). [LOW CONFIDENCE — default]
 - Heading hierarchy: H2 for major sections, H3 for sub-sections; no H4+ in standard deliverables. [LOW CONFIDENCE — default]
 
-**Confidence scale**: LOW = seen in ≤ 2 docs or inferred; MEDIUM = 3–5 docs; HIGH = 6+ docs, no conflict.
+Each rule carries a confidence tier — see the canonical `## Confidence scale` below.
+
+---
+
+## Confidence scale
+*(canonical — both the Style Guide and Ingest Loop reference this; do not duplicate elsewhere)*
+
+- **LOW** — seen in ≤ 2 docs, or inferred. Working default only; never enshrined without ratification.
+- **MEDIUM** — recurs across 3–5 independent docs. A single high-authority document (e.g. a ratified PMO standard) may fast-track straight to MEDIUM on human sign-off.
+- **HIGH** — recurs across 6+ independent docs with no unresolved conflict.
 
 ---
 
@@ -72,34 +81,35 @@ Decision thresholds summary:
 Place the document in `skills/house-style/references/inbox/`.
 
 **Step 2 — Redact BEFORE anything else**
-Remove or replace: full names → [NAME], dollar amounts → [AMOUNT], client/project identifiers → [CLIENT], any PII. Do this before storing the file or sending it to any model. The redacted version is the only version that enters the workflow.
+Remove or replace: full names → [NAME], dollar amounts → [AMOUNT], client/project identifiers → [CLIENT], any PII. Do this before storing the file or sending it to any model. The redacted version is the only version that enters the workflow. After redaction, delete or return the original unredacted file; do not retain the unredacted original in the repo.
 
 **Step 3 — Observe (extract candidate patterns)**
-Run `python skills/house-style/scripts/observe.py` to confirm the file is in inbox. Then feed the redacted doc to each of the three prompts in `references/extraction-prompts.md` (style-guide extraction, structural-template extraction, analysis-rubric extraction). Collect the candidate rules and confidence ratings the LLM returns.
+Run `python skills/house-style/scripts/observe.py` to list inbox contents and confirm the target file appears. Extract from ONE file per pass (clear the inbox to a single file, or process each file in its own separate pass) so candidate rules are always tied to a known source. Then feed the redacted doc to each of the three prompts in `references/extraction-prompts.md` (style-guide extraction, structural-template extraction, analysis-rubric extraction). Collect the candidate rules and confidence ratings the LLM returns.
 
 **Step 4 — Reconcile vs existing kit**
-For each candidate rule:
+First record the document's approximate authorship date (when the senior PM wrote it — NOT the date you ingest it). All "prefer the more recent" comparisons below use the document date, not the ingest date. For each candidate rule:
 - **New** (no matching rule exists) → add to style guide / template / glossary with confidence from extraction.
-- **Reinforcing** (matches an existing rule) → bump that rule's confidence level by one tier.
-- **Conflicting** (contradicts an existing rule) → DO NOT silently overwrite. Log the conflict in `references/ingest-log.md` with both versions. Prefer the more recent document's version as the working default, but mark it CONTESTED and keep both until a human ratifies.
+- **Reinforcing** (matches an existing rule) → bump that rule's confidence one tier (see `## Confidence scale`).
+- **Conflicting** (contradicts an existing rule) → DO NOT silently overwrite. Log the conflict in `references/ingest-log.md` with both versions. Prefer the version from the more recently AUTHORED document as the working default, but mark it CONTESTED and keep both until a human ratifies.
 
 **Step 5 — Write back**
-Update `SKILL.md` style guide section, the relevant template in `references/templates/`, and `references/glossary.md` with accepted changes.
-Then record the ingest via:
+Update `SKILL.md` style guide section, the relevant template in `references/templates/`, and `references/glossary.md` with accepted changes. Do NOT write CONTESTED or low-confidence-conflicting rules into SKILL.md, templates, or glossary until a human ratifies them — log them only in `references/ingest-log.md`.
+New templates are markdown files named `references/templates/<doc-type>.md` (e.g. `status-report.md`, `charter.md`), each containing an ordered section list + per-section data fields + table column schemas (column order + units).
+Then record the ingest via (use the DOCUMENT date, not today's date):
 ```
-python skills/house-style/scripts/improve.py "YYYY-MM-DD" "filename (redacted)" "added: X; reinforced: Y; conflict: Z"
+python skills/house-style/scripts/improve.py "<doc-date>" "filename (redacted)" "added: X; reinforced: Y; conflict: Z"
 ```
 
 **Step 6 — Promote exemplars**
 If the document is high quality (HIGH-confidence rules, clean structure), move the redacted + annotated version to `references/exemplars/`. Keep ≤ 3 exemplars per document type; replace the weakest when at capacity.
 
-**Confidence rule**: a pattern graduates from LOW to MEDIUM after recurring in ≥ 3 independent documents; MEDIUM to HIGH after ≥ 6. A single high-authority document (e.g., a ratified PMO standard) may fast-track to MEDIUM on human sign-off.
+Rules graduate tiers per the canonical `## Confidence scale` above.
 
 ---
 
 ## Quality Gates
 
-- **Triangulate**: a pattern becomes a firm (HIGH-confidence) rule only after it recurs across ≥ 3 independent documents. Do not enshrine one-doc patterns without explicit human ratification.
+- **Triangulate**: a pattern becomes a firm (HIGH-confidence) rule only after it recurs across ≥ 3 independent documents. Do not enshrine one-doc patterns without explicit human ratification. Exception: a single high-authority document (e.g. a ratified PMO standard) may fast-track to MEDIUM on human sign-off (see `## Confidence scale`).
 - **Source quality filter**: do not ingest draft documents, unchecked AI outputs, or documents flagged as low-quality by the author. Note the source quality in the ingest-log entry.
 - **Expert interview**: when extraction yields LOW-confidence or CONTESTED rules, schedule a 30-minute interview with the senior PM to capture tacit reasoning not visible in the text.
 - **Periodic human ratification**: review all CONTESTED and LOW-confidence rules quarterly. A human must approve before they are promoted or deleted.

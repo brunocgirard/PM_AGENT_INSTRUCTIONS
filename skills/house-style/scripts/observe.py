@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""observe.py — read redacted docs in references/inbox/, emit candidate style rules.
+"""observe.py — list redacted docs waiting in references/inbox/.
 Usage: python observe.py            (lists inbox files + extraction checklist)
 This is a helper scaffold: it prepares the material; the LLM (Copilot/Claude) does
 the extraction using references/extraction-prompts.md, then improve.py records it."""

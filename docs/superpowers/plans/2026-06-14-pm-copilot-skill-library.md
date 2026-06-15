@@ -6,7 +6,18 @@
 
 **Architecture:** Each skill is a folder under `skills/` with a `SKILL.md` (YAML frontmatter + markdown body) and optional `references/`, `scripts/`, `assets/`. A Python validator enforces the format contract (folder name = `name`, `description` ≤1024 chars, body ≤8000 chars, valid YAML, required fields). `house-style` is a living skill with an ingest loop (observe→reconcile→write-back) modeled on jzOcb/writing-style-skill. Knowledge files move into each skill's `references/`.
 
-**Tech Stack:** Markdown + YAML frontmatter (agentskills.io standard); Python 3.14 (validator + house-style scripts); git; PowerShell 7 / bash for commands.
+**Tech Stack:** Markdown + YAML frontmatter (agentskills.io standard); Python 3.14 (validator); git; PowerShell 7 / bash for commands.
+
+---
+
+## Implementation note (2026-06-14, applied during execution)
+
+Mid-execution design change to **Task 6 (house-style)**, per user direction: house-style is **not** a runtime ingest-loop skill. It is a **knowledge/reference file the agent grounds on**, added to Copilot Studio as a Knowledge source, and **grown offline** (run the extraction prompts on redacted senior-PM docs, update the file, re-upload). Consequences vs. the original Task 6 below:
+- `scripts/observe.py` and `scripts/improve.py` were **removed** (no runtime loop).
+- `references/inbox/` was **removed**.
+- `references/ingest-log.md` was **renamed to `references/change-log.md`** (a manual, append-by-hand changelog).
+- The SKILL.md "Ingest loop" section became a `## How this file is grown (offline)` workflow.
+The `house-style/references/extraction-prompts.md`, `glossary.md`, `templates/`, and `exemplars/` were kept. Task 6 steps below describing scripts/inbox/ingest-log are superseded by this note.
 
 ---
 

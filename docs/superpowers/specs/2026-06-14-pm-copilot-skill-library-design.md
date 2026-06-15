@@ -171,15 +171,17 @@ a static prompt — and the ingest log makes every change auditable and reversib
 **living skill** — ingest-loop instructions, empty `references/` slots (inbox, templates,
 exemplars, glossary, ingest-log), and the observe/improve scripts adapted from
 jzOcb/writing-style-skill; document the Copilot Studio import steps; identify which
-borrowed community skills to vendor vs reference.
+borrowed community skills to vendor; **vendor them into `skills/` with each one's
+LICENSE + a provenance note** (source repo URL, commit/version, date vendored).
 
-**Out of scope (later):** vendoring the borrowed skills into the repo (license check first);
-MCP wiring; running the actual senior-PM ingest (needs real docs); validation harness.
+**Out of scope (later):** MCP wiring; running the actual senior-PM ingest (needs real docs);
+validation harness.
 
 ## Open questions
 
-- Borrowed docx/pptx (and other community) skills are *source-available*, not OSI open —
-  license check before vendoring into this repo.
+- Borrowed skills are *source-available* (Anthropic) / various community licenses — **decision:
+  vendor them**, preserving each skill's LICENSE file + a `PROVENANCE.md` per vendored skill;
+  internal use only, do not redistribute the repo publicly without re-checking terms.
 - House-style ingest scripts (`observe`/`improve`): runnable inside Copilot Studio, or run
   locally (Claude Code / editor) to update the SKILL.md, then re-import? Likely the latter —
   confirm what the rebuilt Copilot Studio executes.

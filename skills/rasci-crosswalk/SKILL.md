@@ -24,9 +24,11 @@ Scope is the **training swimlane plus OCM handoffs** — every activity where th
 user is Responsible or Accountable, plus the points where OCM hands work off to
 training or training hands off to OCM.
 
-Use the gap categories in `references/gap-taxonomy.md`, and emit machine-readable
-results matching `references/output-schema.json`. Recognize any
-responsibility-matrix notation per `references/rasci-variants.md`.
+Use the gap categories in `references/gap-taxonomy.md`; recognize any notation per
+`references/rasci-variants.md`; and use the field names and category labels in
+`references/output-schema.json` as your column headers and vocabulary. Render all
+outputs as clean markdown tables (the user pastes them into Excel) — do not emit
+raw JSON unless the user asks.
 
 # Source-of-truth and recency rules (critical)
 
@@ -74,9 +76,9 @@ keeping OCM handoffs aligned. Mark each insertion as **"confirmed"** or
 **"at-risk (decision under review)"**. Present it as a proposal for the user to
 validate, never as final truth.
 
-To render a timeline, emit Mermaid `gantt` syntax (a mermaid skill renders it to an image).
+Emit Mermaid `gantt` syntax; a separate mermaid-rendering skill converts it to an image.
 
-# RASCI-ID matching key (used by Phases 4 and 5)
+## Planner matching rules (used in Phases 4 and 5)
 
 Planner has no IDs or dependencies matching the RASCI, so each Planner task must
 carry its **RASCI ID** — a title prefix (e.g. `R-014 — Draft comms`) or a Planner
@@ -130,7 +132,7 @@ missing-sequence count + list; then prioritized fixes, highest-leverage first.
 When you draft any document or artifact, apply the company `house-style` guidance
 if that skill is loaded in this agent — its style guide governs voice, its
 templates govern structure, its analysis rubric governs what you check and in
-what order. (The agent is configured to load `house-style` alongside this skill.)
+what order.
 
 # Working habits
 

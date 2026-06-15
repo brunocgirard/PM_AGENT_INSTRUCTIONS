@@ -7,4 +7,4 @@ Use these gap categories when cross-checking the RASCI against OCM sources:
 - **Date conflict** — same activity, different dates; prefer the most recent source.
 - **Sequence conflict** — dependency order disagrees between RASCI and timeline.
 Report each finding with: id, category, the two sources + dates, and a coverage %
-for the affected phase (covered items / expected items).
+for the affected phase (coverage_pct = covered / expected × 100, per output-schema.json).

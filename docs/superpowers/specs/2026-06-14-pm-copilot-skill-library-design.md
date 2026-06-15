@@ -57,13 +57,29 @@ PM Copilot  (one Copilot Studio agent, generative orchestration ON)
 
 | Skill | Source | Job | Borrows | references/ |
 |---|---|---|---|---|
-| `house-style` | NEW (from senior-PM docs) | Voice + structure + rigor every output follows | distilled-rules + annotated-exemplars pattern | style-guide, templates, exemplars, glossary, analysis-rubric |
+| `house-style` | NEW — **living/self-learning** (modeled on jzOcb/writing-style-skill) | Voice + structure + rigor every output follows; grows each time a senior-PM doc is uploaded | jzOcb observe→improve loop; distilled-rules + annotated-exemplars | style-guide, templates, exemplars, glossary, analysis-rubric, ingest log |
 | `pm-coach` | `01..PLAN_V2.md` | Coach live hybrid projects + PMP tutor | ECO-weighting; tag-question-to-PMBOK-principle; Socratic ask-before-tell | K1,K3,K4,K5,K6,K7 |
 | `rasci-crosswalk` | `03..md` | RASCI ↔ OCM timeline traceability + gap analysis + Planner reconcile | `shtracer` gap taxonomy + JSON output schema; completeness-% scoring | RASCI variants glossary |
 | `exec-briefing` | `04..md` | Current→Target→Gap one-pager (Word) + 3–5 slide deck spec | Ragas "faithfulness" as provenance gate model | (calls docx/pptx skills) |
 | `ol-kpi-architect` | `05..md` | KPI catalog + scorecard + control-point register | Kirkpatrick backward-from-Level-4 design | Kirkpatrick/ADKAR refs |
 | `docx-builder` | Anthropic skill | Generate .docx | — | — |
 | `pptx-builder` | Anthropic skill | Generate .pptx | — | — |
+
+### Borrowed community skills (well-rated, agentskills.io format)
+
+Vendored into the library (license-checked) or used as templates. Star counts ≈ June 2026.
+
+| Capability | Borrow | How used |
+|---|---|---|
+| Word / PPT / Excel / PDF generation | [anthropics/skills](https://github.com/anthropics/skills) — docx, pptx, xlsx, pdf, **internal-comms** | `exec-briefing` output; status-report formatting. *Source-available — internal use OK, check before redistributing.* |
+| "Write like me" self-learning loop | [jzOcb/writing-style-skill](https://github.com/jzOcb/writing-style-skill) | **Architecture base for `house-style`** (observe→improve scripts) |
+| De-AI / tone cleanup | [blader/humanizer](https://github.com/blader/humanizer) (~24k) | Final pass on any drafted prose |
+| Exec-summary / dashboard-spec / tech→business translation | [nimrodfisher/data-analytics-skills](https://github.com/nimrodfisher/data-analytics-skills) | Cherry-pick into `exec-briefing` / `ol-kpi-architect` |
+| Status notes / meeting notes / weekly report | [claude-office-skills/skills](https://github.com/claude-office-skills/skills) | Templates for `pm-coach` drafting |
+| Gantt / timeline / flowchart render | [WH-2099/mermaid-skill](https://github.com/WH-2099/mermaid-skill) · [Agents365-ai/mermaid-skill](https://github.com/Agents365-ai/mermaid-skill) | Render backend for `rasci-crosswalk` timeline + RASCI visuals |
+| Ongoing discovery | [ComposioHQ](https://github.com/ComposioHQ/awesome-claude-skills) · [alirezarezvani](https://github.com/alirezarezvani/claude-skills) · [travisvn](https://github.com/travisvn/awesome-claude-skills) curated lists | Browse for new skills over time |
+
+**Gap:** no well-rated RASCI/RACI-matrix skill exists → `rasci-crosswalk` stays a custom build.
 
 ### How `house-style` plugs into the others
 
@@ -74,32 +90,58 @@ its analysis rubric governs what you check and in what order."* The `house-style
 body stays generic; document-type specifics live in its `references/` (one template
 + exemplars per type).
 
-## The House Style "Voice & Rigor" kit (senior-PM extraction)
+## The House Style "Voice & Rigor" kit — a LIVING, self-learning skill
 
-Layered kit — **distilled testable rules** (always-on, in SKILL.md body) +
-**templates/exemplars/glossary** (retrieved, in `references/`).
+`house-style` is **not** a one-shot extraction. It is a living document that gets
+**molded by every senior-PM file uploaded**: each upload runs an ingest loop that
+extracts patterns and *appends/refines* the kit, so the agent's sense of "our house
+voice" sharpens over time. Architecture is modeled on
+[jzOcb/writing-style-skill](https://github.com/jzOcb/writing-style-skill)
+(observe → extract → write-back → improve).
 
-| Artifact | Contains | Where it lives |
-|---|---|---|
-| Style Guide | Testable voice/tone/formatting rules ("open with a one-line RAG verdict") | `SKILL.md` body |
-| Do / Don't list | Sharp positive + negative constraints | `SKILL.md` body |
-| Analysis Rubric | Ordered analytical steps + decision thresholds (how they *reason*) | `SKILL.md` body |
-| Structural Templates | Section order + section intents + table schemas, per doc type | `references/templates/` |
-| Annotated Exemplars | 2–3 gold docs per type, with margin notes on *why* a passage works | `references/exemplars/` |
-| Glossary | Preferred terms, acronyms, banned phrases | `references/glossary.md` |
+### Layered kit (what grows)
 
-### Extraction workflow (run when real docs arrive)
+| Artifact | Contains | Where it lives | Grows on upload? |
+|---|---|---|---|
+| Style Guide | Testable voice/tone/formatting rules ("open with a one-line RAG verdict") | `SKILL.md` body | Yes — rules added/refined |
+| Do / Don't list | Sharp positive + negative constraints | `SKILL.md` body | Yes |
+| Analysis Rubric | Ordered analytical steps + decision thresholds (how they *reason*) | `SKILL.md` body | Yes |
+| Structural Templates | Section order + section intents + table schemas, per doc type | `references/templates/` | Yes — new type → new template |
+| Annotated Exemplars | 2–3 gold docs per type, margin notes on *why* a passage works | `references/exemplars/` | Yes — best example per type kept |
+| Glossary | Preferred terms, acronyms, banned phrases | `references/glossary.md` | Yes |
+| **Ingest log** | What each upload changed, with date + confidence | `references/ingest-log.md` | Yes — append-only audit trail |
 
-1. **Curate & redact** — 5–15 docs *per type*; tag type/audience/phase/date/quality;
-   strip names, dollar figures, client identifiers **before** any text enters a prompt.
-2. **Meta-prompt the LLM per type** to draft style guide, template, rubric. (Spec ships
-   copy-paste prompts in `house-style/references/extraction-prompts.md`.)
-3. **Triangulate** — extract only patterns recurring across ≥3 docs; flag inconsistencies
-   (defense against overfitting to one doc's quirks).
-4. **Expert interview (30–60 min)** — capture the tacit reasoning docs hide ("what's the
-   first thing you look at when a milestone slips?"). This is what separates rigor from mimicry.
-5. **Human ratification** — senior PM marks which patterns are intentional vs accidental;
-   never extract from low-rated docs.
+### The ingest loop (runs each time you upload a doc)
+
+1. **Drop the file** into `house-style/references/inbox/` (or paste it).
+2. **Redact** — strip names, dollar figures, client identifiers **before** anything is
+   stored or sent to a model.
+3. **Observe** — extract this doc's patterns (voice, structure, table schemas, reasoning
+   cues) into a candidate rule set.
+4. **Reconcile against the existing kit** — for each candidate:
+   - *New, consistent* → add it.
+   - *Reinforces an existing rule* → bump its confidence.
+   - *Conflicts with an existing rule* → flag in the ingest log, prefer the **more recent**
+     doc, and keep both until a human ratifies (do not silently overwrite).
+5. **Write back** — update the Style Guide / templates / glossary; record the change +
+   date + confidence in `ingest-log.md`.
+6. **Promote exemplars** — if the doc is a *gold* example of its type, keep it (redacted,
+   annotated) and retire a weaker one so exemplar count stays ≤3 per type.
+
+Rules carry a **confidence** that rises as more docs reinforce them; low-confidence rules
+are applied tentatively and surfaced for review. This is what makes it "living" rather than
+a static prompt — and the ingest log makes every change auditable and reversible.
+
+### Quality gates (kept from the extraction method)
+
+- **Triangulate** — a pattern becomes a firm rule only after it recurs across ≥3 docs;
+  single-doc patterns stay low-confidence (defense against overfitting to one doc's quirks).
+- **Expert interview (optional, high-value)** — a 30–60 min talk with the senior PM captures
+  tacit reasoning the documents hide ("what's the first thing you look at when a milestone
+  slips?"). Feed answers in as a high-confidence upload. This is what separates rigor from mimicry.
+- **Human ratification** — periodically the senior PM (or you) reviews the ingest log and
+  confirms/rejects flagged conflicts and low-confidence rules; never enshrine patterns from
+  low-rated docs.
 6. **Validate** — hold-out test (generate against a brief whose real output you have but the
    agent hasn't seen); pairwise LLM-as-judge ("which sounds more like the author?"); rubric-graded
    human review. Failures point to a missing/wrong rule → fix the artifact.
@@ -123,24 +165,31 @@ Layered kit — **distilled testable rules** (always-on, in SKILL.md body) +
 
 ## Scope
 
-**In scope (first build):** author the 6 first-party skills (`house-style`, `pm-coach`,
+**In scope (first build):** author the 5 first-party skills (`house-style`, `pm-coach`,
 `rasci-crosswalk`, `exec-briefing`, `ol-kpi-architect`) as SKILL.md bundles with
-`references/` populated from existing knowledge files; scaffold `house-style` with
-extraction prompts and empty `references/` slots; document the Copilot Studio import steps.
+`references/` populated from existing knowledge files; scaffold `house-style` as a
+**living skill** — ingest-loop instructions, empty `references/` slots (inbox, templates,
+exemplars, glossary, ingest-log), and the observe/improve scripts adapted from
+jzOcb/writing-style-skill; document the Copilot Studio import steps; identify which
+borrowed community skills to vendor vs reference.
 
-**Out of scope (later):** borrowing/vendoring the Anthropic docx/pptx skills (evaluate
-licenses first); MCP wiring; running the actual senior-PM extraction (needs real docs);
-validation harness.
+**Out of scope (later):** vendoring the borrowed skills into the repo (license check first);
+MCP wiring; running the actual senior-PM ingest (needs real docs); validation harness.
 
 ## Open questions
 
-- Borrowed docx/pptx skills are *source-available*, not OSI open — license check before vendoring.
+- Borrowed docx/pptx (and other community) skills are *source-available*, not OSI open —
+  license check before vendoring into this repo.
+- House-style ingest scripts (`observe`/`improve`): runnable inside Copilot Studio, or run
+  locally (Claude Code / editor) to update the SKILL.md, then re-import? Likely the latter —
+  confirm what the rebuilt Copilot Studio executes.
 - Confirm whether Copilot Studio imports a skill **folder/zip** or points at a repo path
   (affects packaging) — verify in the rebuilt UI when we build.
 
 ## Success criteria
 
-- All 6 skills load in PM Copilot and trigger on natural phrasing (description-driven).
+- All 5 first-party skills load in PM Copilot and trigger on natural phrasing (description-driven).
+- `house-style` ingests an uploaded doc and visibly updates its rules + ingest log.
 - An exec briefing generated through `exec-briefing` + `house-style` is judged
   "sounds like our senior PM" on a hold-out test.
 - Each skill body is ≤8,000 chars; descriptions ≤1024 chars; folder names match `name`.

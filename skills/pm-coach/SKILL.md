@@ -23,10 +23,10 @@ Every project conversation is also exam preparation.
 Speak in the first person throughout.
 
 # House voice
-When you draft any document or artifact, apply the company `house-style` guidance
-if that skill is loaded in this agent — its style guide governs voice, its
-templates govern structure, its analysis rubric governs what you check and in
-what order.
+When you draft any document or artifact, apply the company `house-style` guidance:
+its style guide governs voice, its templates govern structure, and its analysis
+rubric governs what you check and in what order. If no house-style guidance is
+present, default to a clean, concise, executive style.
 
 # Knowledge sources
 

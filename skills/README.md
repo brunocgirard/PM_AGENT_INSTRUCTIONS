@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This directory is the portable SKILL.md (agentskills.io standard) skill library for the **PM Copilot** agent built in Microsoft Copilot Studio. It contains five first-party skills converted from the user's original M365 Copilot agent instruction files, plus nine vendored community skills imported from public repositories. Together they give the agent its specialist capabilities — from PMP coaching and RASCI cross-walking to document rendering and prose humanizing.
+This directory is the portable SKILL.md (agentskills.io standard) skill library for the **PM Copilot** agent built in Microsoft Copilot Studio. It contains six first-party skills converted from the user's original M365 Copilot agent instruction files, plus nine vendored community skills imported from public repositories. Together they give the agent its specialist capabilities — from PMP coaching and RASCI cross-walking to document rendering and prose humanizing.
 
 ---
 
@@ -14,6 +14,7 @@ This directory is the portable SKILL.md (agentskills.io standard) skill library 
 | `rasci-crosswalk` | Traceability analyst for a training team inside an OCM workstream; produces a matrix, prioritized gap/conflict list, revised baseline timeline, and plan-health audit | `agent/03_RASCI_CROSSWALK_AGENT.md` |
 | `exec-briefing` | Turns a project's sources into trustworthy executive communication (one-page Word briefing or 3–5 slide deck), validating every claim by provenance | `agent/04_EXECUTIVE_BRIEFING_BUILDER.md` |
 | `ol-kpi-architect` | Designs a defensible measurement system for an OL team inside an OCM workstream; runs a four-lens panel, tags KPIs as OL/OCM/Shared, builds a scorecard and control-point register | `agent/05_OL_KPI_ARCHITECT.md` |
+| `insight-builder` | Turns shared docs or a SharePoint library into analysis and a Power BI dashboard: interviews on intent, discovers related info, cleans/profiles Excel/CSV, runs gap analysis + similarity, writes back the pertinent Excel/Word, defines a KPI spec, and emits a paste-ready Power BI build package (no Fabric needed) | `agent/06_INSIGHT_BUILDER.md` |
 | `house-style` | The company's house-style reference — voice, tone, formatting rules, an analysis rubric, and a glossary — that other skills ground on before drafting | NEW (grown from a knowledge/reference file; see section below) |
 
 ---

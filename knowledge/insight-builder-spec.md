@@ -31,9 +31,12 @@ You share: a doc OR a SharePoint library of docs
    │   1. Discover related info                   │
    │   2. Clean & profile        (Code Interp.)   │
    │   3. Gaps + similarity      (Code Interp.)   │
-   │   4. Produce artifact (Excel/Word)           │
-   │   5. Define what to track (KPI spec)         │
-   │   6. Power BI build package                  │
+   │   4. Trends + forecast      (Code Interp.)   │
+   │   5. Drivers / root cause   (Code Interp.)   │
+   │   6. Narrative summary                       │
+   │   7. Produce artifact (Excel/Word)           │
+   │   8. Define what to track (KPI spec)         │
+   │   9. Power BI build package                  │
    │                                              │
    │  Actions:                                    │
    │   • Create/Update file in SharePoint (Flow)  │
@@ -45,7 +48,7 @@ You share: a doc OR a SharePoint library of docs
 
 ## 3. Skills — see the runnable definitions
 
-The seven topics are defined in two committed places:
+The nine topics are defined in two committed places:
 - **Portable skill:** `skills/insight-builder/SKILL.md` (agentskills.io format, validator-clean).
 - **Copilot Studio config:** `agent/06_INSIGHT_BUILDER.md` (name, description, paste-in instructions, knowledge/tool wiring, capability-check table).
 
@@ -55,7 +58,7 @@ The seven topics are defined in two committed places:
 2. Add the SharePoint library + business glossary as Knowledge. Fill descriptions + synonyms. **Test grounding first.**
 3. Settings → File processing → File uploads = On; Code interpreter = On.
 4. Wire the Power Automate "Create/Update file in SharePoint" action and enable Document output.
-5. Build/verify topics 0→6 against one real dataset each.
+5. Build/verify topics 0→9 against one real dataset each.
 6. Publish to Teams; pilot with 2–3 real datasets; refine the glossary from wrong answers.
 
 ## 5. Honest boundary

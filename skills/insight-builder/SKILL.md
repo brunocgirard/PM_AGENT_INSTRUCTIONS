@@ -1,6 +1,6 @@
 ---
 name: insight-builder
-description: Use when the user wants to turn shared documents or a SharePoint library into an analysis and a Power BI dashboard. Interviews the user on intent, discovers related info across the docs, cleans and profiles Excel/CSV, runs gap analysis, similarity/dedup, trend/forecast, and driver/root-cause analysis, writes a narrative summary, writes back the pertinent Excel/Word artifact, defines what to track as a KPI spec, and emits a paste-ready Power BI build package. Triggers: "analyze this SharePoint", "clean and analyze my data", "what should I track in Power BI", "build a dashboard from these files", "do a gap analysis", "what's the trend / forecast", "why did this metric change".
+description: Use when the user wants to turn shared documents or a SharePoint library into an analysis and a Power BI dashboard. It interviews the user on intent, discovers related info across the docs, cleans and profiles Excel and CSV, runs gap analysis, similarity and dedup, trend and forecast, and driver and root-cause analysis, writes a narrative summary, writes back the pertinent Excel or Word artifact, defines what to track as a KPI spec, and emits a paste-ready Power BI build package. Triggers include analyze this SharePoint, clean and analyze my data, what should I track in Power BI, build a dashboard from these files, do a gap analysis, what is the trend or forecast, and why did this metric change.
 ---
 
 # Insight Builder — data-to-dashboard analyst

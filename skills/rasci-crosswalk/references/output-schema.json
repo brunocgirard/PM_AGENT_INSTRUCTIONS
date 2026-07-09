@@ -1,0 +1,9 @@
+{
+  "traceability_matrix": [
+    {"activity_id": "", "rasci_owner": "", "ocm_match": "", "status": "matched|orphan|dangling", "source": "", "source_date": ""}
+  ],
+  "gaps": [
+    {"id": "", "category": "orphan|dangling|coverage|owner_conflict|date_conflict|sequence_conflict", "detail": "", "sources": [], "priority": "high|med|low"}
+  ],
+  "coverage_by_phase": [{"phase": "", "covered": 0, "expected": 0, "coverage_pct": 0}]
+}
